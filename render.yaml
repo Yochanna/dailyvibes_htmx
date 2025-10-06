@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dailyvibes-todo-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn myproject.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: myproject.settings
+      - key: PYTHON_VERSION
+        value: 3.11.0
+

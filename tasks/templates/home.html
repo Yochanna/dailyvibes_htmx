@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <title>My Daily Vibes List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>My Daily Vibes List</h1>
+      <p class="subtitle">A simple HTMX + Django demo</p>
+    </header>
+
+    <section class="card">
+      <form class="add-form" hx-post="{% url 'add_task' %}" hx-target="#task-list" hx-swap="innerHTML">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Add a new task..." required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section id="task-list" class="card">
+      {% include "partials/task_list.html" %}
+    </section>
+
+    <footer>
+      <small>Built with Django + HTMX</small>
+    </footer>
+  </div>
+</body>
+</html>
